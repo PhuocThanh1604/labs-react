@@ -1,0 +1,49 @@
+.footer {
+  background-color: #d1c4e9;
+  margin: 0 auto;
+  padding: 20px 0px 20px 0px;
+}
+.jumbotron {
+  padding: 70px 30px 70px 30px;
+  margin: 0px auto;
+  color: floralwhite;
+}
+address {
+  font-size: 90%;
+  margin: 0px;
+  color: #0f0f0f;
+}
+.row-header {
+  margin: 0 auto;
+  padding: 0px auto;
+}
+.row-content {
+  margin: 0 auto;
+  padding: 50px 0px 50px 0px;
+  border-radius: 1px ridge;
+  min-height: 400px;
+}
+.list-unstyled {
+  list-style: none;
+}
+.content-h3 {
+  margin-top: -30px;
+}
+.content-about {
+  margin-left: -10px;
+}
+.content-history {
+  padding-bottom: 50px;
+}
+.content-corporate {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.child-content {
+  border-bottom: 1px solid lightgrey;
+  margin-top: 4px;
+  padding-bottom: 50px;
+}
+.content {
+  margin: 4px 1px 4px 2px;
+}
