@@ -25,7 +25,7 @@ class Menu extends Component {
     if (dish != null)
       return (
         <Card>
-          <CardImg top src={dish.image} alt={dish.name} />
+          <CardImg top src={dish.image} alt={dish.name} /> 
           <div className="bg-[#f1eaea]  p-2">
             <div className="text-[#b55d5d] text-center uppercase mb-2">
               <strong>{dish.name}</strong>
