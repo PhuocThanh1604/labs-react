@@ -73,7 +73,7 @@ function About(props) {
             The restaurant traces its humble beginnings to{" "}
             <em>The Frying Pan</em>, a successful chain started by our CEO, Mr.
             Peter Pan, that featured for the first time the world's best
-            cuisines in a pan.
+            cuisines in a pan...
           </p>
         </div>
         <div className="col-12 col-md-5">
