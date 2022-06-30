@@ -127,7 +127,7 @@ class Header extends Component {
                   </NavItem>
                   <NavItem>
                     <NavLink className="nav-link" to="/contactus">
-                      <span className="fa fa-address-card fa-lg"></span> Contact
+                      <span className="fa fa-address-card fa-lg"></span>Contact
                       Us
                     </NavLink>
                   </NavItem>
@@ -139,7 +139,7 @@ class Header extends Component {
                       outline
                       onClick={this.toggleModal}
                     >
-                      <span className="fa fa-sign-in fa-lg"></span> Login
+                      <span className="fa fa-sign-in fa-lg"></span>Login
                     </Button>
                   </NavItem>
                 </Nav>
