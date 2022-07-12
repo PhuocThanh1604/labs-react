@@ -16,9 +16,11 @@ import {
   FormGroup,
   Input,
   Label,
+  CloseButton,
 } from "reactstrap";
 
 class Header extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -26,6 +28,10 @@ class Header extends Component {
       isNavOpen: false,
       isModalOpen: false,
     };
+    this.state = {
+      isNavOff: true,
+      isModalOff: true
+    }
 
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -58,7 +64,10 @@ class Header extends Component {
     return (
       <React.Fragment>
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>
+            Login
+          </ModalHeader>
+        
           <ModalBody>
             <Form onSubmit={this.handleLogin}>
               <FormGroup>
