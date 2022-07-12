@@ -9,7 +9,7 @@ $carousel-item-height: 300px;
 // add a mixin
 @mixin zero-margin($pad-up-dn, $pad-left-right) {
   margin: 0px auto;
-  padding: $pad-up-dn $pad-left-right;
+  padding:$pad-up-dn $pad-left-right;
 }
 
 // use of this to define several row classes next
