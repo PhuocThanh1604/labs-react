@@ -20,7 +20,7 @@ class Main extends Component {
       dishes: DISHES,
       comments: COMMENTS,
       promotions: PROMOTIONS,
-      leaders: LEADERS,
+      leaders: LEADERS
     };
   }
   onDishSelect(dishId) {
