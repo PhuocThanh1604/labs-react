@@ -44,7 +44,7 @@ export const COMMENTS =
         id: 5,
         dishId: 1,
         rating: 5,
-        comment: "Imagine all the eatables, living in conFusion!",
+        comment: "Imagine allthe eatables , living in conFusion!",
         author: "John Lemon",
         date: "2012-10-16T17:57:28.556094Z"
     },
