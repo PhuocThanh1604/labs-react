@@ -66,7 +66,6 @@ class Main extends Component {
             path="/menu"
             component={() => <Menu dishes={this.state.dishes} />}
           />
-
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact}></Route>
           <Redirect to="/home" />
@@ -76,5 +75,4 @@ class Main extends Component {
     );
   }
 }
-
 export default Main;
