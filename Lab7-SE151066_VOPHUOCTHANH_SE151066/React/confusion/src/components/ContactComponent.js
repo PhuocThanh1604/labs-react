@@ -285,7 +285,7 @@ class Contact extends Component {
               </Row>
               <Row className="form-group">
                 <Label htmlFor="lastname" md={2}>
-                  Last Name  
+                  Last Name
                 </Label>
                 <Col md={10}>
                   <Control.text
