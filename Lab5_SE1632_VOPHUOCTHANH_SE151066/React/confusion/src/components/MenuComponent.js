@@ -1,25 +1,22 @@
 import { Component } from "react";
-import {
-  Card,
-  CardImg,
-  CardImgOverlay,
-  CardText,
-  CardBody,
-  CardTitle,
-} from "reactstrap";
+import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+  CardTitle } from 'reactstrap';
 
-class Menu extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      selectedDish:null,
-    };
-  }
+  class Menu extends Component {
 
-  onDishSelect(dish) {
-    this.setState({ selectedDish: dish });
-  }
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selectedDish: null
+        }
+    }
+
+    onDishSelect(dish) {
+        this.setState({ selectedDish: dish});
+    }
+
 
   renderDish(dish) {
     if (dish != null)
