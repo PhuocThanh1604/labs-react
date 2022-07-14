@@ -6,7 +6,7 @@
 .row-content {
   margin: 0px auto;
   padding: 50px 0px 50px 0px;
-  border-bottom: 2px ridge;
+  border-bottom: 1px ridge;
   min-height: 400px;
 }
 
@@ -34,10 +34,9 @@ address {
 }
 
 #ModalHeader {
- 
 }
 
-.button btn-close{
+.button btn-close {
   width: 10px;
   height: 10px;
 }
