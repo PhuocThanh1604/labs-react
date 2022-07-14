@@ -7,4 +7,3 @@ export const Comments = (state = COMMENTS, action) => {
           return state;
       }
 };
-
