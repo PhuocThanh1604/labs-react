@@ -173,16 +173,16 @@
                     <button class="btn btn-danger btn-sm" id="carouselButton">
                         <span id="carousel-button-icon" class="fa fa-pause"></span>
                     </button>
-                    <!--
-					<div class="btn-group" id="carouselButton">
-						<button class="btn btn-danger btn-sm" id="carousel-pause">
-							<span class="fa fa-pause"></span>
-						</button>
-						<button class="btn btn-danger btn-sm" id="carousel-play">
-							<span class="fa fa-play"></span>
-						</button>
-					</div>
-					-->
+
+                    <!-- <div class="btn-group" id="carouselButton">
+                        <button class="btn btn-danger btn-sm" id="carousel-pause">
+                            <span class="fa fa-pause"></span>
+                        </button>
+                        <button class="btn btn-danger btn-sm" id="carousel-play">
+                            <span class="fa fa-play"></span>
+                        </button>
+                    </div> -->
+
                 </div>
             </div>
         </div>
@@ -423,7 +423,7 @@
 
 
             $("#mycarousel").carousel({
-                interval:350
+                interval: 350
             });
             $("#carouselButton").click(function () {
                 if ($("#carouselButton").children("span").hasClass('fa-pause')) {
