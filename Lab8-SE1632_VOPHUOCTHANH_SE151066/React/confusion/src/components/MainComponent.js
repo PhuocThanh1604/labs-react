@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import Home from "./HomeComponent";
 import About from "./AboutComponent";
-import Menu from "./MenuComponent";
 import Contact from "./ContactComponent";
 import DishDetail from "./DishdetailComponent";
-import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
-import { actions } from "react-redux-form";
-// import { addComment, fetchDishes } from '../redux/ActionCreators';
-// import {
-//   addComment,
-//   fetchDishes,
-//   fetchComments,
-//   fetchPromos,
-// } from "../redux/ActionCreators";
+import Header from "./HeaderComponent";
+import Home from "./HomeComponent";
+import Menu from "./MenuComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -21,8 +13,12 @@ import {
   fetchDishes,
   fetchComments,
   fetchPromos,
+  fetchLeaders,
+  postFeedback,
 } from "../redux/ActionCreators";
+import { actions } from "react-redux-form";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 const mapStateToProps = (state) => {
   return {
     dishes: state.dishes,
@@ -33,7 +29,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  //addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
   postComment: (dishId, rating, author, comment) =>
     dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => {
@@ -42,19 +37,24 @@ const mapDispatchToProps = (dispatch) => ({
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
-  fetchComments: () => dispatch(fetchComments()),
-  fetchPromos: () => dispatch(fetchPromos()),
+  fetchComments: () => {
+    dispatch(fetchComments());
+  },
+  fetchPromos: () => {
+    dispatch(fetchPromos());
+  },
+  fetchLeaders: () => {
+    dispatch(fetchLeaders());
+  },
+  postFeedback: (feedback) => dispatch(postFeedback(feedback)),
 });
 
 class Main extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
   componentDidMount() {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
 
   render() {
@@ -63,15 +63,19 @@ class Main extends Component {
         <Home
           dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}
           dishesLoading={this.props.dishes.isLoading}
-          dishErrMess={this.props.dishes.errMess}
+          dishesErrMess={this.props.dishes.errMess}
           promotion={
             this.props.promotions.promotions.filter(
               (promo) => promo.featured
             )[0]
           }
-          promoLoading={this.props.promotions.isLoading}
-          promoErrMess={this.props.promotions.errMess}
-          leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+          promosLoading={this.props.promotions.isLoading}
+          promosErrMess={this.props.promotions.errMess}
+          leader={
+            this.props.leaders.leaders.filter((leader) => leader.featured)[0]
+          }
+          leadersLoading={this.props.leaders.isLoading}
+          leadersErrMess={this.props.leaders.errMess}
         />
       );
     };
@@ -90,7 +94,6 @@ class Main extends Component {
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
           commentsErrMess={this.props.comments.errMess}
-          // addComment={this.props.addComment}
           postComment={this.props.postComment}
         />
       );
@@ -118,12 +121,14 @@ class Main extends Component {
                 component={() => <Menu dishes={this.props.dishes} />}
               />
               <Route path="/menu/:dishId" component={DishWithId} />
-              {/* <Route exact path="/contactus" component={Contact} /> */}
               <Route
                 exact
                 path="/contactus"
                 component={() => (
-                  <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+                  <Contact
+                    postFeedback={this.props.postFeedback}
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                  />
                 )}
               />
               <Redirect to="/home" />
@@ -136,5 +141,4 @@ class Main extends Component {
   }
 }
 
-// export default withRouter(connect(mapStateToProps)(Main));
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

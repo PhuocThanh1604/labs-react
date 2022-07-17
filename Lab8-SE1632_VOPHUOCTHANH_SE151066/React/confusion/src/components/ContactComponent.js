@@ -1,5 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,8 +8,8 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
-
+import { Control, Form, Errors } from "react-redux-form";
+import { Link } from "react-router-dom";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -21,87 +21,16 @@ const validEmail = (val) =>
 class Contact extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      firstname: "",
-      lastname: "",
-      telnum: "",
-      email: "",
-      agree: false,
-      contactType: "Tel.",
-      message: "",
-      touched: {
-        firstname: false,
-        lastname: false,
-        telnum: false,
-        email: false,
-      },
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  handleSubmit(event) {
-    console.log("Current State is: " + JSON.stringify(this.state));
-    alert("Current State is: " + JSON.stringify(this.state));
-    // event.preventDefault();
-  }
-
-  handleBlur = (field) => (evt) => {
-    this.setState({
-      touched: { ...this.state.touched, [field]: true },
-    });
-  };
-
-  validate(firstname, lastname, telnum, email) {
-    const errors = {
-      firstname: "",
-      lastname: "",
-      telnum: "",
-      email: "",
-    };
-
-    if (this.state.touched.firstname && firstname.length < 3)
-      errors.firstname = "First Name should be >= 3 characters";
-    else if (this.state.touched.firstname && firstname.length > 10)
-      errors.firstname = "First Name should be <= 10 characters";
-
-    if (this.state.touched.lastname && lastname.length < 3)
-      errors.lastname = "Last Name should be >= 3 characters";
-    else if (this.state.touched.lastname && lastname.length > 10)
-      errors.lastname = "Last Name should be <= 10 characters";
-
-    const reg = /^\d+$/;
-    if (this.state.touched.telnum && !reg.test(telnum))
-      errors.telnum = "Tel. Number should contain only numbers";
-
-    if (
-      this.state.touched.email &&
-      email.split("").filter((x) => x === "@").length !== 1
-    )
-      errors.email = "Email should contain a @";
-
-    return errors;
+  handleSubmit(values) {
+    console.log("Submitting feedback: " + JSON.stringify(values));
+    this.props.postFeedback(values);
+    this.props.resetFeedbackForm();
   }
 
   render() {
-    const errors = this.validate(
-      this.state.firstname,
-      this.state.lastname,
-      this.state.telnum,
-      this.state.email
-    );
     return (
       <div className="container">
         <div className="row">
@@ -112,13 +41,13 @@ class Contact extends Component {
             <BreadcrumbItem active>Contact Us</BreadcrumbItem>
           </Breadcrumb>
           <div className="col-12">
-            <h3>Contact Us</h3>
+            <h3 class="text-secondary">Contact Us</h3>
             <hr />
           </div>
         </div>
         <div className="row row-content">
           <div className="col-12">
-            <h3>Location Information</h3>
+            <h3 class="text-secondary">Location Information</h3>
           </div>
           <div className="col-12 col-sm-4 offset-sm-1">
             <h5>Our Address</h5>
@@ -139,16 +68,6 @@ class Contact extends Component {
           </div>
           <div className="col-12 col-sm-6 offset-sm-1">
             <h5>Map of our Location</h5>
-            <iframe
-              title="address"
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31349.234289279048!2d106.8060503!3d10.8377466!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1656582554829!5m2!1svi!2s"
-              width="600"
-              height="450"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              className="google-map"
-            ></iframe>
           </div>
           <div className="col-12 col-sm-11 offset-sm-1">
             <div className="btn-group" role="group">
@@ -159,7 +78,7 @@ class Contact extends Component {
               >
                 <i className="fa fa-phone"></i> Call
               </a>
-              <a role="button" className="btn btn-info">
+              <a role="button" className="btn btn-info" href="/">
                 <i className="fa fa-skype"></i> Skype
               </a>
               <a
@@ -174,10 +93,14 @@ class Contact extends Component {
         </div>
         <div className="row row-content">
           <div className="col-12">
-            <h3>Send us your Feedback</h3>
+            <h3 class="text-secondary">Send us your Feedback</h3>
           </div>
           <div className="col-12 col-md-9">
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+            {/* <LocalForm onSubmit={(values) => this.handleSubmit(values)}> */}
+            <Form
+              model="feedback"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
               <Row className="form-group">
                 <Label htmlFor="firstname" md={2}>
                   First Name
@@ -209,7 +132,7 @@ class Contact extends Component {
               </Row>
               <Row className="form-group">
                 <Label htmlFor="lastname" md={2}>
-                  Last Namee
+                  Last Name
                 </Label>
                 <Col md={10}>
                   <Control.text
@@ -238,7 +161,7 @@ class Contact extends Component {
               </Row>
               <Row className="form-group">
                 <Label htmlFor="telnum" md={2}>
-                  Contact Tel..
+                  Contact Tel.
                 </Label>
                 <Col md={10}>
                   <Control.text
@@ -294,11 +217,58 @@ class Contact extends Component {
                   />
                 </Col>
               </Row>
-            </LocalForm>
+              <Row className="form-group">
+                <Col md={{ size: 6, offset: 2 }}>
+                  <div className="form-check">
+                    <Label check>
+                      <Control.checkbox
+                        model=".agree"
+                        name="agree"
+                        className="form-check-input"
+                      />{" "}
+                      <strong>May we contact you?</strong>
+                    </Label>
+                  </div>
+                </Col>
+                <Col md={{ size: 3, offset: 1 }}>
+                  <Control.select
+                    model=".contactType"
+                    name="contactType"
+                    className="form-control"
+                  >
+                    <option>Tel.</option>
+                    <option>Email</option>
+                  </Control.select>
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Label htmlFor="message" md={2}>
+                  Your Feedback
+                </Label>
+                <Col md={10}>
+                  <Control.textarea
+                    model=".message"
+                    id="message"
+                    name="message"
+                    rows="12"
+                    className="form-control"
+                  />
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Col md={{ size: 10, offset: 2 }}>
+                  <Button type="submit" color="primary">
+                    Send Feedback
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+            {/* </LocalForm> */}
           </div>
         </div>
       </div>
     );
   }
 }
+
 export default Contact;
